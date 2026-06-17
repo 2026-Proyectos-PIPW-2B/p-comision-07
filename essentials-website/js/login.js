@@ -49,7 +49,7 @@ if (yaLogueado) {
   //Redirigir según rol
   feedbackEl.classList.add("d-none");
   if (encontrado.rol === "admin") {
-    window.location.href = "admin.html";
+    window.location.href = "panel-admin.html";
   } else {
     window.location.href = "inicio.html";
   }
