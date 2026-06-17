@@ -1,14 +1,20 @@
 // Función para renderizar los productos en el HTML
-function renderizarProductos() {
+function renderizarProductos(listaProductos) {
   const contenedor = document.getElementById("contenedor-productos");
-  const productosGuardados = JSON.parse(localStorage.getItem("productos"));
+  const productosAMostrar = listaProductos || JSON.parse(localStorage.getItem("productos"));
 
-  if (!contenedor || !productosGuardados) return;
+  if (!contenedor || !productosAMostrar) return;
 
-  // Limpiar el contenedor antes de renderizar
   contenedor.innerHTML = "";
 
-  productosGuardados.forEach((producto) => {
+  if (productosAMostrar.length === 0) {
+    contenedor.innerHTML = `<div class="col-12 text-center py-5">
+      <p class="fs-4 text-muted">No se encontraron productos que coincidan con tu búsqueda.</p>
+    </div>`;
+    return;
+  }
+
+  productosAMostrar.forEach((producto) => {
     const cardCol = document.createElement("div");
     cardCol.className = "col";
 
@@ -41,4 +47,4 @@ function renderizarProductos() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", renderizarProductos);
+document.addEventListener("DOMContentLoaded", () => renderizarProductos());
