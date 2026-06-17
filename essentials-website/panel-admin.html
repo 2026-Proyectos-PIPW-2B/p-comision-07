@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESSENTIALS · Panel Admin</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .bebas,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5.bebas,
+      .navbar-brand {
+        font-family: "Bebas Neue", sans-serif;
+        letter-spacing: 2px;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        letter-spacing: 2px;
+        font-size: 2rem;
+        line-height: 1.1;
+      }
+      .label-admin {
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #495057;
+      }
+
+      .admin-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        flex: 1;
+        width: 100%;
+      }
+
+      .nav-admin-pills {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      .nav-admin-pills .nav-link {
+        color: #212529;
+        border: 1px solid #dee2e6;
+        border-radius: 50px;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .nav-admin-pills .nav-link:hover {
+        background-color: #e9ecef;
+      }
+      .nav-admin-pills .nav-link.active {
+        background-color: #212529 !important;
+        color: #fff !important;
+        border-color: #212529;
+      }
+
+      .stat-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .timer-opt {
+        cursor: pointer;
+        border-color: #dee2e6 !important;
+        transition:
+          border-color 0.15s,
+          background-color 0.15s;
+      }
+      .timer-opt:hover {
+        border-color: #6c757d !important;
+      }
+      .timer-opt.selected {
+        border-color: #212529 !important;
+        background-color: #f8f9fa !important;
+      }
+
+      .search-group .input-group-text {
+        border-radius: 50px 0 0 50px;
+        border-right: 0;
+        background: #fff;
+      }
+      .search-group .form-control {
+        border-left: 0;
+        border-radius: 0 50px 50px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class="toast-container position-fixed top-0 end-0 p-3"
+      style="z-index: 9999"
+    >
+      <div
+        id="adminToast"
+        class="toast align-items-center text-bg-dark border-0 rounded-4"
+        role="alert"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body fw-semibold" id="toast-msg">
+            <i class="bi bi-info-circle me-2"></i>Notificación.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark py-2 sticky-top"
+      id="navbar"
+    >
+      <div class="container d-flex align-items-center justify-content-between">
+        <div class="flex-grow-1 flex-lg-grow-0" style="flex-basis: 200px">
+          <a
+            class="navbar-brand text-uppercase fs-2 m-0"
+            href="inicio.html"
+            style="
+              font-family: &quot;Bebas Neue&quot;, sans-serif;
+              letter-spacing: 1px;
+            "
+            >ESSENTIALS</a
+          >
+        </div>
+
+        <div
+          class="d-flex align-items-center justify-content-end gap-3 order-lg-3"
+          style="flex-basis: 200px"
+        >
+          <a class="text-white fs-4" href="carrito.html"
+            ><i class="bi bi-cart3"></i
+          ></a>
+          <a class="text-white fs-4" href="login.html"
+            ><i class="bi bi-person-circle"></i
+          ></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuNavegacion"
+            aria-controls="menuNavegacion"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div
+          class="collapse navbar-collapse flex-grow-1 order-lg-2"
+          id="menuNavegacion"
+        >
+          <ul
+            class="navbar-nav mx-auto align-items-center mb-2 mb-lg-0 text-center"
+          >
+            <li class="nav-item">
+              <a class="nav-link text-white" href="inicio.html">INICIO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="inicio.html#categorias"
+                >CATEGORIAS</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="productos.html">PRODUCTOS</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-lg-none"></div>
+      </div>
+    </nav>
+
+    <div class="admin-container">
+      <nav class="mb-5">
+        <ul class="nav nav-pills nav-admin-pills" id="adminTabs">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              data-bs-toggle="pill"
+              data-bs-target="#tab-panel"
+              href="#"
+              ><i class="bi bi-speedometer2 me-2"></i>Panel</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="pill"
+              data-bs-target="#tab-producto"
+              href="#"
+              ><i class="bi bi-bag-plus me-2"></i>Alta de Producto</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="pill"
+              data-bs-target="#tab-ver-usuarios"
+              href="#"
+              ><i class="bi bi-people me-2"></i>Usuarios</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="pill"
+              data-bs-target="#tab-agregar-usuario"
+              href="#"
+              ><i class="bi bi-person-plus me-2"></i>Nuevo Usuario</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-bs-toggle="pill"
+              data-bs-target="#tab-seguridad"
+              href="#"
+              ><i class="bi bi-shield-lock me-2"></i>Seguridad</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <main class="tab-content">
+        <div class="tab-pane fade show active" id="tab-panel">
+          <div class="mx-auto" style="max-width: 600px">
+            <div class="text-center mb-5">
+              <h2 class="section-title mb-1">Bienvenido</h2>
+              <p class="text-muted small mb-0" id="fecha-actual">—</p>
+            </div>
+
+            <div class="row g-3 mb-5">
+              <div class="col-6">
+                <div
+                  class="card border-0 shadow-sm rounded-4 text-center p-3 h-100 bg-white"
+                >
+                  <p class="label-admin mb-2">Productos</p>
+                  <h3 class="fw-bold fs-2 mb-0 bebas" id="stat-productos">0</h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div
+                  class="card border-0 shadow-sm rounded-4 text-center p-3 h-100 bg-white"
+                >
+                  <p class="label-admin mb-2">Usuarios</p>
+                  <h3 class="fw-bold fs-2 mb-0 bebas" id="stat-total">0</h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div
+                  class="card border-0 shadow-sm rounded-4 text-center p-3 h-100 bg-white"
+                >
+                  <p class="label-admin mb-2 text-success">Habilitados</p>
+                  <h3
+                    class="fw-bold fs-2 mb-0 bebas text-success"
+                    id="stat-enabled"
+                  >
+                    0
+                  </h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div
+                  class="card border-0 shadow-sm rounded-4 text-center p-3 h-100 bg-white"
+                >
+                  <p class="label-admin mb-2 text-danger">Deshab.</p>
+                  <h3
+                    class="fw-bold fs-2 mb-0 bebas text-danger"
+                    id="stat-disabled"
+                  >
+                    0
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-producto">
+          <div class="text-center mb-4">
+            <h2 class="section-title mb-1">Alta de Producto</h2>
+            <p class="text-muted small">Cargá un nuevo artículo al catálogo.</p>
+          </div>
+
+          <div
+            class="card border-0 shadow-sm rounded-4 bg-white mx-auto"
+            style="max-width: 600px"
+          >
+            <div class="card-body p-4">
+              <form id="form-producto">
+                <div class="mb-4">
+                  <label class="label-admin d-block mb-2"
+                    >Nombre del Producto *</label
+                  >
+                  <input
+                    type="text"
+                    id="prod-nombre"
+                    class="form-control rounded-3"
+                    placeholder="Ej: Buzo Hoodie"
+                    required
+                  />
+                </div>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-6">
+                    <label class="label-admin d-block mb-2">Categoría *</label>
+                    <select
+                      class="form-select rounded-3"
+                      id="prod-categoria"
+                      required
+                    >
+                      <option value="">Seleccioná</option>
+                      <option>Pantalones</option>
+                      <option>Camperas</option>
+                      <option>Buzos</option>
+                      <option>Remeras</option>
+                      <option>Combos</option>
+                      <option>Accesorios</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label class="label-admin d-block mb-2">Stock *</label>
+                    <select
+                      class="form-select rounded-3"
+                      id="prod-stock"
+                      required
+                    >
+                      <option value="">Seleccioná</option>
+                      <option value="alto">🟢 Stock alto</option>
+                      <option value="medio">🟡 Stock medio</option>
+                      <option value="ultimas">🔴 Últimas unidades</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-6">
+                    <label class="label-admin d-block mb-2">Precio *</label>
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input
+                        type="number"
+                        id="prod-precio"
+                        class="form-control"
+                        placeholder="0"
+                        min="0"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <label class="label-admin d-block mb-2">Descuento</label>
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        id="prod-descuento"
+                        class="form-control"
+                        placeholder="0"
+                        min="0"
+                        max="100"
+                      />
+                      <span class="input-group-text">% OFF</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="label-admin d-block mb-2"
+                    >Imagen del Producto *</label
+                  >
+                  <div class="row g-2">
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        id="prod-img-nombre"
+                        class="form-control rounded-3"
+                        placeholder="Nombre (ej: producto-1)"
+                        required
+                      />
+                    </div>
+                    <div class="col-4">
+                      <select
+                        id="prod-img-formato"
+                        class="form-select rounded-3"
+                        required
+                      >
+                        <option value=".webp">.webp</option>
+                        <option value=".jpg">.jpg</option>
+                        <option value=".jpeg">.jpeg</option>
+                        <option value=".png">.png</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4" />
+                <div class="d-grid gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-dark rounded-pill fw-bold py-2"
+                  >
+                    <i class="bi bi-cloud-arrow-up me-2"></i>SUBIR PRODUCTO
+                  </button>
+                  <button
+                    type="button"
+                    id="btn-previsualizar"
+                    class="btn btn-outline-dark rounded-pill fw-bold py-2"
+                  >
+                    ✨ PREVISUALIZAR
+                  </button>
+                  <button
+                    type="reset"
+                    class="btn btn-outline-secondary rounded-pill py-2"
+                    id="btn-cancelar-producto"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-ver-usuarios">
+          <div class="text-center mb-4">
+            <h2 class="section-title mb-1">Usuarios</h2>
+            <p class="text-muted small">Administrá los accesos a la tienda.</p>
+          </div>
+
+          <div class="card border shadow-sm rounded-4 bg-white mb-4">
+            <div class="card-body p-3">
+              <div
+                class="d-flex align-items-center justify-content-between flex-wrap gap-3"
+              >
+                <div
+                  class="input-group input-group-sm search-group mx-auto mx-md-0"
+                  style="max-width: 300px"
+                >
+                  <span class="input-group-text"
+                    ><i class="bi bi-search text-muted"></i
+                  ></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="user-search"
+                    placeholder="Buscar usuario..."
+                  />
+                </div>
+                <div class="d-flex align-items-center gap-2 mx-auto mx-md-0">
+                  <button
+                    type="button"
+                    class="btn btn-dark btn-sm rounded-pill px-3 fw-semibold"
+                    id="sort-az"
+                  >
+                    A — Z
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    id="sort-za"
+                  >
+                    Z — A
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden"
+          >
+            <div class="table-responsive">
+              <table
+                class="table table-hover align-middle mb-0"
+                id="users-table"
+              >
+                <thead class="table-dark">
+                  <tr>
+                    <th class="ps-4 py-3 small text-uppercase fw-semibold">
+                      Usuario
+                    </th>
+                    <th
+                      class="py-3 small text-uppercase fw-semibold d-none d-md-table-cell"
+                    >
+                      Email
+                    </th>
+                    <th class="py-3 small text-uppercase fw-semibold">Rol</th>
+                    <th class="py-3 small text-uppercase fw-semibold">
+                      Estado
+                    </th>
+                    <th class="pe-4 py-3 text-end">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="users-tbody"></tbody>
+              </table>
+            </div>
+            <div class="text-center py-5 d-none" id="users-empty">
+              <p class="text-muted mb-0">No se encontraron usuarios.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-agregar-usuario">
+          <div class="text-center mb-4">
+            <h2 class="section-title mb-1">Agregar Usuario</h2>
+            <p class="text-muted small">Creá una nueva cuenta.</p>
+          </div>
+
+          <div
+            class="card border-0 shadow-sm rounded-4 bg-white mx-auto"
+            style="max-width: 600px"
+          >
+            <div class="card-body p-4">
+              <form id="form-nuevo-usuario">
+                <div class="mb-4">
+                  <label class="label-admin d-block mb-2">Email *</label>
+                  <input
+                    type="email"
+                    class="form-control rounded-3"
+                    id="new-email"
+                    placeholder="usuario@ejemplo.com"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="label-admin d-block mb-2">Contraseña *</label>
+                  <input
+                    type="password"
+                    class="form-control rounded-3"
+                    id="new-pass"
+                    required
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="label-admin d-block mb-2">Rol *</label>
+                  <select class="form-select rounded-3" id="nuevo-rol">
+                    <option value="usuario">Usuario</option>
+                    <option value="admin">Administrador</option>
+                  </select>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-dark rounded-pill fw-bold w-100 py-2"
+                >
+                  CREAR USUARIO
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-seguridad">
+          <div class="text-center mb-4">
+            <h2 class="section-title mb-1">Seguridad</h2>
+            <p class="text-muted small">Configuración de sesión.</p>
+          </div>
+
+          <div
+            class="card border-0 shadow-sm rounded-4 bg-white mx-auto"
+            style="max-width: 600px"
+          >
+            <div class="card-body p-4">
+              <div class="form-check form-switch mb-4">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="auto-logout-toggle"
+                  checked
+                />
+                <label class="form-check-label fw-bold" for="auto-logout-toggle"
+                  >Cierre de sesión automático</label
+                >
+              </div>
+              <div id="timer-options">
+                <label class="label-admin d-block mb-2">Tiempo permitido</label>
+                <select class="form-select rounded-3 mb-4" id="session-timer">
+                  <option value="15" selected>15 minutos</option>
+                  <option value="30">30 minutos</option>
+                  <option value="60">1 hora</option>
+                </select>
+              </div>
+              <button
+                class="btn btn-dark rounded-pill fw-bold w-100 py-2"
+                id="btn-guardar-seguridad"
+              >
+                GUARDAR
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="bg-dark text-white pt-4 pb-3 mt-5">
+      <div class="container text-center">
+        <h3 class="bebas fs-2 mb-0">ESSENTIALS</h3>
+        <hr class="text-white-50 my-3" />
+        <p class="text-white-50 small mb-0">
+          &copy; 2026 Essentials. Reservados todos los derechos.
+        </p>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title bebas">Previsualización</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div
+            class="modal-body p-4 d-flex justify-content-center"
+            id="preview-card-container"
+          ></div>
+          <div class="modal-footer border-0 pt-0">
+            <button
+              type="button"
+              class="btn btn-dark rounded-pill px-4 w-100 fw-bold"
+              data-bs-dismiss="modal"
+            >
+              CERRAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
