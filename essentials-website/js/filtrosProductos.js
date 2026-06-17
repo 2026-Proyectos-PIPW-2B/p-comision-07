@@ -32,7 +32,11 @@ function aplicarFiltrosYOrden() {
     }
   });
 
-  renderizarProductos(productosFiltrados);
+  if (document.getElementById("contenedor-productos")) {
+    renderizarProductos(productosFiltrados);
+  } else if (document.getElementById("products-tbody")) {
+    renderizarTablaProductos(productosFiltrados);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
