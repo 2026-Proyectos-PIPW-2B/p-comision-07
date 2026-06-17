@@ -113,11 +113,12 @@
             class="d-flex align-items-center justify-content-between flex-wrap gap-3"
           >
             <nav aria-label="Filtrar por categoría">
-              <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+              <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0" id="lista-categorias">
                 <li>
                   <button
                     type="button"
-                    class="btn btn-dark btn-sm rounded-pill px-3 fw-semibold"
+                    class="btn btn-dark btn-sm rounded-pill px-3 fw-semibold btn-categoria"
+                    data-categoria="Todos"
                   >
                     Todos
                   </button>
@@ -125,7 +126,8 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Pantalones"
                   >
                     Pantalones
                   </button>
@@ -133,7 +135,8 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Camperas"
                   >
                     Camperas
                   </button>
@@ -141,7 +144,8 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Buzos"
                   >
                     Buzos
                   </button>
@@ -149,7 +153,8 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Remeras"
                   >
                     Remeras
                   </button>
@@ -157,7 +162,8 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Combos"
                   >
                     Combos
                   </button>
@@ -165,13 +171,29 @@
                 <li>
                   <button
                     type="button"
-                    class="btn btn-outline-dark btn-sm rounded-pill px-3"
+                    class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria"
+                    data-categoria="Accesorios"
                   >
                     Accesorios
                   </button>
                 </li>
               </ul>
             </nav>
+
+            <div class="flex-grow-1 mx-lg-3">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text bg-white border-end-0 rounded-start-pill">
+                  <i class="bi bi-search text-muted"></i>
+                </span>
+                <input
+                  type="text"
+                  id="buscador-productos"
+                  class="form-control border-start-0 rounded-end-pill"
+                  placeholder="Buscar productos..."
+                  aria-label="Buscar productos"
+                />
+              </div>
+            </div>
 
             <div class="d-flex align-items-center gap-2">
               <label
@@ -190,7 +212,8 @@
               </select>
               <button
                 type="button"
-                class="btn btn-sm btn-outline-dark"
+                id="orden-asc"
+                class="btn btn-sm btn-dark"
                 aria-label="Ordenar ascendente"
                 title="Ascendente"
               >
@@ -198,6 +221,7 @@
               </button>
               <button
                 type="button"
+                id="orden-desc"
                 class="btn btn-sm btn-outline-dark"
                 aria-label="Ordenar descendente"
                 title="Descendente"
@@ -216,819 +240,7 @@
           class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
           id="contenedor-productos"
         >
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-15% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-1.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-1"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Pantalones</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Baggie azul
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="1"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-20% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-2.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-2"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Remeras</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Remera regular fit
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="2"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-10% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-3.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-3"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Camperas</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Campera Jean Hombre
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="3"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-25% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-4.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-4"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Buzos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Buzo Hoodie
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="4"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-30% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-5.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-5"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Combos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Conjunto 1
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="5"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-15% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-6.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-6"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Accesorios</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Bag Negra
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="6"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-20% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-7.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-7"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Pantalones</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Baggie azul claro
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="7"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-10% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-8.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-8"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Remeras</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Remera Relaxed
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="8"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-25% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-9.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-9"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Camperas</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Campera Jean Mujer
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="9"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-30% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-10.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-10"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Buzos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Buzo Hoodie
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="10"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-15% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-11.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-11"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Combos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Conjunto 2
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="11"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-20% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-12.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-12"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Accesorios</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Mini bag Negra
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="12"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-10% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-13.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-13"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Pantalones</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Baggie azul oscuro
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="13"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-25% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-14.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-14"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Remeras</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Remera Boxy fit
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="14"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-30% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-15.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-15"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Camperas</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Campera Abrigo
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="15"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-15% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-16.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-16"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Buzos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Buzo Hoodie
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="16"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-20% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-17.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-17"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Combos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Conjunto 3
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="17"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-10% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-18.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-18"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Accesorios</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Mini bag mostaza
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="18"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-25% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-19.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-19"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Pantalones</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Baggie Negro
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="19"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-30% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-20.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-20"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Remeras</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Remera Classic
-                </h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="20"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-15% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-21.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-21"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Camperas</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Campera Softshell
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="21"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-20% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-22.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-22"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Buzos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Buzo Hoodie
-                </h5>
-                <p class="text-warning small mb-3 fw-bold">Stock medio</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="22"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-10% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-23.webp"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-23"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Combos</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">
-                  Conjunto Deportivo
-                </h5>
-                <p class="text-success small mb-3 fw-bold">Stock alto</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="23"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div
-              class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative"
-            >
-              <span
-                class="badge rounded-pill bg-dark position-absolute top-0 start-0 m-3 z-1 px-3 py-2"
-                >-25% OFF</span
-              >
-              <div class="ratio ratio-1x1">
-                <img
-                  src="img/producto-24.jpg"
-                  class="object-fit-cover w-100 h-100"
-                  alt="producto-24"
-                />
-              </div>
-              <div
-                class="card-body text-center d-flex flex-column bg-white p-4"
-              >
-                <p class="text-muted small text-uppercase mb-1">Accesorios</p>
-                <h5 class="card-title fw-bold text-uppercase mb-2">Bag Gris</h5>
-                <p class="text-danger small mb-3 fw-bold">Últimas unidades</p>
-                <p class="card-text fs-4 mb-4 fw-semibold text-dark">$0</p>
-                <button
-                  class="btn btn-dark rounded-pill fw-bold mt-auto w-100 btn-comprar py-2"
-                  data-id="24"
-                >
-                  AÑADIR AL CARRITO
-                </button>
-              </div>
-            </div>
-          </div>
+          <!-- Los productos se cargarán dinámicamente desde JS -->
         </div>
       </div>
     </section>
@@ -1073,5 +285,8 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/cargarProductos.js"></script>
+    <script src="js/renderizarProductos.js"></script>
+    <script src="js/filtrosProductos.js"></script>
   </body>
 </html>
