@@ -5,17 +5,10 @@ const usuariosIniciales = [
     email: "admin@essentials.com",
     password: "123456",
     rol: "admin",
-    bloqueado: false
+    bloqueado: false,
   },
-  {
-    id: 2,
-    nombre: "Juan",
-    email: "usuario@essentials.com",
-    password: "123456",
-    rol: "usuario",
-    bloqueado: false
-  }
 ];
 
-localStorage.setItem("usuarios", JSON.stringify(usuariosIniciales));
-
+if (!localStorage.getItem("usuarios")) {
+  localStorage.setItem("usuarios", JSON.stringify(usuariosIniciales));
+}
