@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (usuarioLogueado.rol === "admin") {
     html += `
-      <a class="text-white fs-4 me-3" href="panel-admin.html">
+      <a class="text-white fs-4 me-3 text-decoration-none" href="panel-admin.html">
         <i class="bi bi-gear"></i>
       </a>
     `;
