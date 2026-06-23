@@ -1,4 +1,3 @@
-// Función para renderizar los productos en el HTML
 function renderizarProductos(listaProductos) {
   const contenedor = document.getElementById("contenedor-productos");
   const productosAMostrar = listaProductos || JSON.parse(localStorage.getItem("productos"));
@@ -45,6 +44,8 @@ function renderizarProductos(listaProductos) {
 
     contenedor.appendChild(cardCol);
   });
+
+  vincularBotonesCarrito();
 }
 
 document.addEventListener("DOMContentLoaded", () => renderizarProductos());
