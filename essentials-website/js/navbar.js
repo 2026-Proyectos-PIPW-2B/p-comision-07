@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  CarritoStorage.actualizarContador();
   const cuentaContainer = document.getElementById("cuenta-navbar");
   if (!cuentaContainer) return;
 
