@@ -39,4 +39,22 @@ const CarritoStorage = {
     CarritoStorage.guardar(carritoActualizado);
   },
 
+  contarUnidades: function () {
+    const carrito = CarritoStorage.obtener();
+    let total = 0;
+
+    for (const item of carrito) {
+      total += item.cantidad;
+    }
+
+    return total;
+  },
+
+  actualizarContador: function () {
+    const contador = document.getElementById("contador-carrito");
+    if (!contador) return;
+
+    contador.textContent = CarritoStorage.contarUnidades();
+  },
+
 };

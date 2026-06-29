@@ -3,6 +3,7 @@ function vincularBotonesCarrito() {
     boton.addEventListener("click", () => {
       const idProducto = Number(boton.dataset.id);
       CarritoStorage.agregarProducto(idProducto);
+      CarritoStorage.actualizarContador();
 
       const textoOriginal = boton.textContent;
       boton.textContent = "AGREGADO ✓";

@@ -54,6 +54,7 @@ const Carrito = {
 
   init: function () {
     Carrito.actualizarResumen();
+    CarritoStorage.actualizarContador();
   },
 
 };
