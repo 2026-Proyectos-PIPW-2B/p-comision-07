@@ -5,7 +5,6 @@ document.getElementById("btnLogin").addEventListener("click", function () {
   const feedbackEl = document.getElementById("feedback");
 
 
-  // Si ya hay alguien logueado, redirigir directo
 const yaLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
 if (yaLogueado) {
   if (yaLogueado.rol === "admin") {
@@ -15,7 +14,6 @@ if (yaLogueado) {
   }
 }
 
-  // Validar formato
   const errores = Validacion.validarLogin(email, password);
   if (errores.length > 0) {
     feedbackEl.innerHTML = "";
@@ -26,7 +24,6 @@ if (yaLogueado) {
     return;
   }
 
-  //Buscar usuario en LocalStorage
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
   const encontrado = usuarios.find(u => u.email === email && u.password === password);
 
@@ -36,17 +33,14 @@ if (yaLogueado) {
     return;
   }
 
-  //Verificar si está bloqueado
   if (encontrado.bloqueado) {
     feedbackEl.innerHTML = "Tu cuenta se encuentra bloqueada. Contactá al administrador.";
     feedbackEl.classList.remove("d-none");
     return;
   }
 
-  //Guardar sesión
   localStorage.setItem("usuarioLogueado", JSON.stringify(encontrado));
 
-  //Redirigir según rol
   feedbackEl.classList.add("d-none");
   if (encontrado.rol === "admin") {
     window.location.href = "panel-admin.html";
