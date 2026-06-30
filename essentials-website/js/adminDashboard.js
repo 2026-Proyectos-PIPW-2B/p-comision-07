@@ -17,12 +17,6 @@ window.actualizarEstadisticas = function () {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Control de acceso para administradores
-  const usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
-  if (!usuarioLogueado || usuarioLogueado.rol !== "admin") {
-    window.location.href = "inicio.html";
-    return;
-  }
 
   // Cargar estadísticas iniciales
   window.actualizarEstadisticas();

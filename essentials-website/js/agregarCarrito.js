@@ -1,6 +1,7 @@
 function vincularBotonesCarrito() {
   document.querySelectorAll(".btn-comprar").forEach((boton) => {
     boton.addEventListener("click", () => {
+      if (!window.requiereAutenticacion()) return;
       const idProducto = Number(boton.dataset.id);
       CarritoStorage.agregarProducto(idProducto);
       CarritoStorage.actualizarContador();
