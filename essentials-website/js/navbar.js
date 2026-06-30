@@ -23,6 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
       </a>
     `;
   }
+  
+  if (usuarioLogueado.rol === "usuario") {
+    html += `
+      <a class="text-white fs-4 me-3 text-decoration-none" href="historialCompras.html" title="Historial de compras">
+        <i class="bi bi-clock-history"></i>
+      </a>
+    `;
+  }
 
   html += `
     <button class="btn btn-sm btn-outline-light rounded-pill" id="btnLogout">
@@ -33,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cuentaContainer.innerHTML = html;
 
   document.getElementById("btnLogout").addEventListener("click", () => {
+    CarritoStorage.guardar([]);
     localStorage.removeItem("usuarioLogueado");
     window.location.href = "login.html";
   });
