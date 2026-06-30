@@ -1,0 +1,147 @@
+// Variable global para saber qué producto estamos editando
+let productoEditandoId = null;
+
+// Escuchamos los clics en la tabla de productos para detectar cuando tocan el lápiz
+document.addEventListener("DOMContentLoaded", () => {
+  const tablaProductos = document.getElementById("products-tbody");
+  
+  if (tablaProductos) {
+    tablaProductos.addEventListener("click", (evento) => {
+      // Si el elemento clickeado tiene la clase btn-editar
+      const botonEditar = evento.target.closest(".btn-editar");
+      
+      if (botonEditar) {
+        // Sacamos el ID del botón
+        const idString = botonEditar.getAttribute("data-id");
+        productoEditandoId = parseInt(idString);
+        
+        abrirModalEditarProducto(productoEditandoId);
+      }
+    });
+  }
+
+  // Escuchar cuando se envía el formulario de edición
+  const formEditar = document.getElementById("form-editar-producto");
+  if (formEditar) {
+    formEditar.addEventListener("submit", guardarCambiosProducto);
+  }
+});
+
+function abrirModalEditarProducto(idProducto) {
+  // Traemos los productos guardados
+  let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  
+  // Buscamos el producto que queremos editar
+  let productoEncontrado = productos.find(p => p.id === idProducto);
+  
+  if (productoEncontrado) {
+    // Llenamos los inputs del modal con los datos actuales
+    document.getElementById("edit-prod-id").value = productoEncontrado.id;
+    document.getElementById("edit-prod-nombre").value = productoEncontrado.nombre;
+    document.getElementById("edit-prod-categoria").value = productoEncontrado.categoria;
+    document.getElementById("edit-prod-precio").value = productoEncontrado.precio;
+    
+    // Para la imagen, le sacamos la ruta y la extensión (.webp)
+    let nombreImagen = productoEncontrado.imagen.replace("img/", "").replace(".webp", "");
+    document.getElementById("edit-prod-imagen").value = nombreImagen;
+
+    // Para el stock, elegimos la opción correcta
+    const selectStock = document.getElementById("edit-prod-stock");
+    if (productoEncontrado.estadoStock.includes("alto")) {
+      selectStock.value = "alto";
+    } else if (productoEncontrado.estadoStock.includes("medio")) {
+      selectStock.value = "medio";
+    } else {
+      selectStock.value = "ultimas";
+    }
+
+    // Mostramos el modal de Bootstrap
+    const modalEl = document.getElementById("editProductModal");
+    const modalBootstrap = new bootstrap.Modal(modalEl);
+    modalBootstrap.show();
+  }
+}
+
+function guardarCambiosProducto(evento) {
+  // Evitamos que la página se recargue
+  evento.preventDefault();
+  
+  let productos = JSON.parse(localStorage.getItem("productos")) || [];
+  
+  // Encontramos la posición del producto en la lista
+  let index = productos.findIndex(p => p.id === productoEditandoId);
+  
+  if (index !== -1) {
+    // Obtenemos los nuevos valores del formulario
+    let nuevoNombre = document.getElementById("edit-prod-nombre").value;
+    let nuevaCategoria = document.getElementById("edit-prod-categoria").value;
+    let nuevoPrecio = parseFloat(document.getElementById("edit-prod-precio").value);
+    let nombreImagen = document.getElementById("edit-prod-imagen").value;
+    
+    // Definimos los textos y colores para el stock según lo seleccionado
+    let stockElegido = document.getElementById("edit-prod-stock").value;
+    let textoStock = "";
+    let claseStock = "";
+    
+    if (stockElegido === "alto") {
+      textoStock = "Stock alto";
+      claseStock = "text-success";
+    } else if (stockElegido === "medio") {
+      textoStock = "Stock medio";
+      claseStock = "text-warning";
+    } else {
+      textoStock = "Últimas unidades";
+      claseStock = "text-danger";
+    }
+
+    // Actualizamos el producto con los nuevos datos
+    productos[index].nombre = nuevoNombre;
+    productos[index].categoria = nuevaCategoria;
+    productos[index].precio = nuevoPrecio;
+    productos[index].estadoStock = textoStock;
+    productos[index].claseStock = claseStock;
+    productos[index].imagen = "img/" + nombreImagen + ".webp";
+    
+    // Guardamos en localStorage
+    localStorage.setItem("productos", JSON.stringify(productos));
+    
+    // También actualizamos el carrito si el producto estaba ahí
+    actualizarProductoEnCarrito(productoEditandoId, nuevoNombre, nuevoPrecio, productos[index].imagen);
+
+    // Escondemos el modal
+    const modalEl = document.getElementById("editProductModal");
+    const modalBootstrap = bootstrap.Modal.getInstance(modalEl);
+    if (modalBootstrap) {
+      modalBootstrap.hide();
+    }
+    
+    // Refrescamos la tabla
+    renderizarTablaProductos();
+    
+    // Mostramos un mensaje de éxito
+    const toastMensaje = document.getElementById("toast-msg");
+    if (toastMensaje) {
+      toastMensaje.innerHTML = "Producto actualizado correctamente.";
+      const toastEl = document.getElementById("adminToast");
+      new bootstrap.Toast(toastEl).show();
+    }
+  }
+}
+
+function actualizarProductoEnCarrito(id, nuevoNombre, nuevoPrecio, nuevaImagen) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  let huboCambios = false;
+  
+  for (let i = 0; i < carrito.length; i++) {
+    if (carrito[i].id === id) {
+      carrito[i].nombre = nuevoNombre;
+      carrito[i].precio = nuevoPrecio;
+      carrito[i].imagen = nuevaImagen;
+      huboCambios = true;
+    }
+  }
+  
+  if (huboCambios) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+}

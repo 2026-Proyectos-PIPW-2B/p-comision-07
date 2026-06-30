@@ -73,6 +73,9 @@ window.renderizarTablaUsuarios = function() {
         </div>
       </td>
       <td class="text-center">
+        <button class="btn btn-sm btn-outline-primary btn-editar-usuario" data-id="${user.id}" title="Editar">
+          <i class="bi bi-pencil"></i>
+        </button>
         <button class="btn btn-sm btn-outline-danger btn-eliminar-usuario" data-id="${user.id}" ${deleteDisabledAttr} title="${esMismoUsuario ? 'No podés eliminarte a vos mismo' : 'Eliminar'}">
           <i class="bi bi-trash"></i>
         </button>
