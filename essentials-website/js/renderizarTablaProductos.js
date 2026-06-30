@@ -18,6 +18,7 @@ function renderizarTablaProductos(listaProductos) {
       </td>
       <td class="text-center"><code class="small text-muted">${producto.imagen.split('/').pop()}</code></td>
       <td class="text-center">
+        <button class="btn btn-sm btn-outline-primary btn-editar" data-id="${producto.id}" title="Editar"><i class="bi bi-pencil"></i></button>
         <button class="btn btn-sm btn-outline-danger btn-eliminar" data-id="${producto.id}"><i class="bi bi-trash"></i></button>
       </td>
     `;

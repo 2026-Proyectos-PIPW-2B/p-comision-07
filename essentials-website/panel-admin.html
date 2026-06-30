@@ -535,6 +535,93 @@
       </div>
     </div>
 
+    <!-- Modal Editar Producto -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title bebas">Editar Producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="form-editar-producto">
+              <input type="hidden" id="edit-prod-id">
+              <div class="mb-3">
+                <label class="label-admin d-block mb-1">Nombre</label>
+                <input type="text" id="edit-prod-nombre" class="form-control rounded-3" required />
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-6">
+                  <label class="label-admin d-block mb-1">Categoría</label>
+                  <select class="form-select rounded-3" id="edit-prod-categoria" required>
+                    <option>Pantalones</option>
+                    <option>Camperas</option>
+                    <option>Buzos</option>
+                    <option>Remeras</option>
+                    <option>Combos</option>
+                    <option>Accesorios</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label class="label-admin d-block mb-1">Stock</label>
+                  <select class="form-select rounded-3" id="edit-prod-stock" required>
+                    <option value="alto">🟢 Stock alto</option>
+                    <option value="medio">🟡 Stock medio</option>
+                    <option value="ultimas">🔴 Últimas unidades</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="label-admin d-block mb-1">Precio</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" id="edit-prod-precio" class="form-control" required />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label class="label-admin d-block mb-1">Imagen (nombre ej: producto-1)</label>
+                <input type="text" id="edit-prod-imagen" class="form-control rounded-3" required />
+              </div>
+              <button type="submit" class="btn btn-dark rounded-pill px-4 w-100 fw-bold">GUARDAR CAMBIOS</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Editar Usuario -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title bebas">Editar Usuario</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="form-editar-usuario">
+              <input type="hidden" id="edit-user-id">
+              <div class="mb-3">
+                <label class="label-admin d-block mb-1">Nombre</label>
+                <input type="text" id="edit-user-nombre" class="form-control rounded-3" required />
+              </div>
+              <div class="mb-3">
+                <label class="label-admin d-block mb-1">Email</label>
+                <input type="email" id="edit-user-email" class="form-control rounded-3" disabled />
+              </div>
+              <div class="mb-4">
+                <label class="label-admin d-block mb-1">Rol</label>
+                <select class="form-select rounded-3" id="edit-user-rol" required>
+                  <option value="usuario">Usuario</option>
+                  <option value="admin">Administrador</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-dark rounded-pill px-4 w-100 fw-bold">GUARDAR CAMBIOS</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/validator@13.11.0/validator.min.js"></script>
     <script src="js/validacion.js"></script>
@@ -550,8 +637,10 @@
     <script src="js/altaUsuario.js"></script>
     <script src="js/bloquearUsuario.js"></script>
     <script src="js/eliminarUsuario.js"></script>
+    <script src="js/editarUsuario.js"></script>
     <script src="js/altaProducto.js"></script>
     <script src="js/previsualizarProducto.js"></script>
+    <script src="js/editarProducto.js"></script>
   </body>
 </html>
 
