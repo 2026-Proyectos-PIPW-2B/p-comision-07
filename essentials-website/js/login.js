@@ -4,16 +4,6 @@ document.getElementById("btnLogin").addEventListener("click", function () {
 
   const feedbackEl = document.getElementById("feedback");
 
-
-const yaLogueado = JSON.parse(localStorage.getItem("usuarioLogueado"));
-if (yaLogueado) {
-  if (yaLogueado.rol === "admin") {
-    window.location.href = "admin.html";
-  } else {
-    window.location.href = "inicio.html";
-  }
-}
-
   const errores = Validacion.validarLogin(email, password);
   if (errores.length > 0) {
     feedbackEl.innerHTML = "";

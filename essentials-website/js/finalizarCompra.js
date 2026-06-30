@@ -5,13 +5,6 @@ const Checkout = {
   mostrarFormulario: function () {
     const carrito = CarritoStorage.obtener();
 
-    let usuarioLogueado = JSON.parse(localStorage.getItem("usuarioLogueado")) || [];
-
-    if (usuarioLogueado.length === 0) {
-        alert("Debes iniciar sesión para finalizar la compra.");
-        window.location.href = "login.html";
-        return;
-    }
 
     if (carrito.length === 0) {
         document.getElementById("btn-finalizar-compra").disabled = true;
