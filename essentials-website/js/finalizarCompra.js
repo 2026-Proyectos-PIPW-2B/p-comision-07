@@ -5,7 +5,6 @@ const Checkout = {
   mostrarFormulario: function () {
     const carrito = CarritoStorage.obtener();
 
-
     if (carrito.length === 0) {
         document.getElementById("btn-finalizar-compra").disabled = true;
         return;
