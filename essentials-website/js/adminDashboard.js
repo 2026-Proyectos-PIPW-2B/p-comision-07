@@ -1,4 +1,3 @@
-// Exponer función global para actualizar las estadísticas del dashboard
 window.actualizarEstadisticas = function () {
   const productos = JSON.parse(localStorage.getItem("productos")) || [];
   const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -17,17 +16,13 @@ window.actualizarEstadisticas = function () {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Cargar estadísticas iniciales
   window.actualizarEstadisticas();
 
-  // Gestión de la pestaña de Seguridad
   const autoLogoutToggle = document.getElementById("auto-logout-toggle");
   const sessionTimer = document.getElementById("session-timer");
   const btnGuardarSeguridad = document.getElementById("btn-guardar-seguridad");
 
   if (autoLogoutToggle && sessionTimer && btnGuardarSeguridad) {
-    // Cargar config guardada o usar valores por defecto
     const configSeguridad = JSON.parse(
       localStorage.getItem("configSeguridad"),
     ) || {
@@ -47,11 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // Inicializar visibilidad y escuchar cambios en el toggle
     actualizarVisibilidadTimer();
     autoLogoutToggle.addEventListener("change", actualizarVisibilidadTimer);
 
-    // Guardar cambios en LocalStorage
     btnGuardarSeguridad.addEventListener("click", () => {
       const nuevaConfig = {
         autoLogout: autoLogoutToggle.checked,
