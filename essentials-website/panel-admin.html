@@ -176,6 +176,9 @@
           <li class="nav-item">
             <a class="nav-link " data-bs-toggle="pill" data-bs-target="#tab-historial" href="#"><i class="bi bi-clock-history me-2"></i>Historial de compras</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " data-bs-toggle="pill" data-bs-target="#tab-categorias" href="#"><i class="bi bi-tags me-2"></i>Categorías</a>
+          </li>
         </ul>
       </nav>
 
@@ -222,32 +225,27 @@
           </div>
           <div class="card border shadow-sm rounded-4 bg-white mb-4 py-3">
             <div class="container-fluid">
-              <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                <nav aria-label="Filtrar por categoría">
-                  <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0" id="lista-categorias">
-                    <li><button type="button" class="btn btn-dark btn-sm rounded-pill px-3 fw-semibold btn-categoria" data-categoria="Todos">Todos</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Pantalones">Pantalones</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Camperas">Camperas</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Buzos">Buzos</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Remeras">Remeras</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Combos">Combos</button></li>
-                    <li><button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 btn-categoria" data-categoria="Accesorios">Accesorios</button></li>
-                  </ul>
-                </nav>
-                <div class="flex-grow-1 mx-lg-3">
+              <div class="d-flex flex-column gap-3">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                  <nav aria-label="Filtrar por categoría">
+                    <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0" id="lista-categorias">
+                    </ul>
+                  </nav>
+                  <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 small text-muted text-uppercase fw-semibold" style="letter-spacing: 1px; white-space: nowrap">Ordenar por</label>
+                    <select id="ordenar-selector" class="form-select form-select-sm" style="min-width: 130px">
+                      <option value="nombre">Nombre</option>
+                      <option value="precio">Precio</option>
+                    </select>
+                    <button type="button" id="orden-asc" class="btn btn-sm btn-dark" title="Ascendente"><i class="bi bi-arrow-up"></i></button>
+                    <button type="button" id="orden-desc" class="btn btn-sm btn-outline-dark" title="Descendente"><i class="bi bi-arrow-down"></i></button>
+                  </div>
+                </div>
+                <div class="w-100">
                   <div class="input-group input-group-sm">
                     <span class="input-group-text bg-white border-end-0 rounded-start-pill"><i class="bi bi-search text-muted"></i></span>
                     <input type="text" id="buscador-productos" class="form-control border-start-0 rounded-end-pill" placeholder="Buscar productos..." />
                   </div>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                  <label class="mb-0 small text-muted text-uppercase fw-semibold" style="letter-spacing: 1px; white-space: nowrap">Ordenar por</label>
-                  <select id="ordenar-selector" class="form-select form-select-sm" style="min-width: 130px">
-                    <option value="nombre">Nombre</option>
-                    <option value="precio">Precio</option>
-                  </select>
-                  <button type="button" id="orden-asc" class="btn btn-sm btn-dark" title="Ascendente"><i class="bi bi-arrow-up"></i></button>
-                  <button type="button" id="orden-desc" class="btn btn-sm btn-outline-dark" title="Descendente"><i class="bi bi-arrow-down"></i></button>
                 </div>
               </div>
             </div>
@@ -312,12 +310,6 @@
                     <label class="label-admin d-block mb-2">Categoría *</label>
                     <select class="form-select rounded-3" id="prod-categoria" required>
                       <option value="">Seleccioná</option>
-                      <option>Pantalones</option>
-                      <option>Camperas</option>
-                      <option>Buzos</option>
-                      <option>Remeras</option>
-                      <option>Combos</option>
-                      <option>Accesorios</option>
                     </select>
                   </div>
                   <div class="col-6">
@@ -507,6 +499,62 @@
                 </div>
               </div>
           </div>
+        </div>
+
+        <div class="tab-pane fade" id="tab-categorias">
+          <div class="text-center mb-4">
+            <h2 class="section-title mb-1">Categorías</h2>
+            <p class="text-muted small">Administrá las categorías de productos.</p>
+          </div>
+          <div class="row g-4 justify-content-center">
+            <div class="col-12 col-md-5">
+              <div class="card border-0 shadow-sm rounded-4 bg-white h-100">
+                <div class="card-body p-4">
+                  <h5 class="bebas mb-3">Nueva Categoría</h5>
+                  <form id="form-nueva-categoria">
+                    <div class="mb-3">
+                      <label class="label-admin d-block mb-2">Nombre de la Categoría *</label>
+                      <input type="text" class="form-control rounded-3" id="nueva-categoria-nombre" placeholder="Ej: Zapatillas" required />
+                    </div>
+                    <div class="mb-4">
+                      <label class="label-admin d-block mb-2">Imagen *</label>
+                      <div class="row g-2">
+                        <div class="col-8">
+                          <input type="text" id="nueva-categoria-img" class="form-control rounded-3" placeholder="Nombre (ej: cat-zapatillas)" required />
+                        </div>
+                        <div class="col-4">
+                          <select id="nueva-categoria-formato" class="form-select rounded-3" required>
+                            <option value=".webp">.webp</option>
+                            <option value=".jpg">.jpg</option>
+                            <option value=".png">.png</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-dark rounded-pill fw-bold w-100 py-2">AGREGAR CATEGORÍA</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <div class="card border-0 shadow-sm rounded-4 bg-white h-100 overflow-hidden">
+                <div class="table-responsive h-100">
+                  <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                      <tr>
+                        <th class="py-3 small text-uppercase fw-semibold text-center">Categoría</th>
+                        <th class="py-3 small text-uppercase fw-semibold text-center">Imagen</th>
+                        <th class="py-3 small text-uppercase fw-semibold text-center" style="width: 100px;">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="categorias-tbody">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
@@ -554,12 +602,7 @@
                 <div class="col-6">
                   <label class="label-admin d-block mb-1">Categoría</label>
                   <select class="form-select rounded-3" id="edit-prod-categoria" required>
-                    <option>Pantalones</option>
-                    <option>Camperas</option>
-                    <option>Buzos</option>
-                    <option>Remeras</option>
-                    <option>Combos</option>
-                    <option>Accesorios</option>
+                    <option value="">Seleccioná</option>
                   </select>
                 </div>
                 <div class="col-6">
@@ -625,6 +668,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/validator@13.11.0/validator.min.js"></script>
     <script src="js/validacion.js"></script>
+    <script src="js/cargarCategorias.js"></script>
+    <script src="js/renderizarCategorias.js"></script>
     <script src="js/cargarProductos.js"></script>
     <script src="js/renderizarProductos.js"></script>
     <script src="js/renderizarTablaProductos.js"></script>
@@ -641,6 +686,7 @@
     <script src="js/altaProducto.js"></script>
     <script src="js/previsualizarProducto.js"></script>
     <script src="js/editarProducto.js"></script>
+    <script src="js/adminCategorias.js"></script>
   </body>
 </html>
 
