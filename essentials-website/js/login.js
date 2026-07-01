@@ -29,6 +29,7 @@ document.getElementById("btnLogin").addEventListener("click", function () {
     return;
   }
 
+  encontrado.horaInicioSesion = Date.now();
   localStorage.setItem("usuarioLogueado", JSON.stringify(encontrado));
 
   feedbackEl.classList.add("d-none");
