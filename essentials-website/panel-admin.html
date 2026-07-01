@@ -24,6 +24,7 @@
     />
 
     <script src="js/enrutamiento.js"></script>
+    <script src="js/controlSesion.js"></script>
   </head>
 
   <body>
@@ -375,13 +376,15 @@
                 <input class="form-check-input" type="checkbox" id="auto-logout-toggle" checked />
                 <label class="form-check-label fw-bold" for="auto-logout-toggle">Cierre de sesión automático</label>
               </div>
-              <div id="timer-options">
-                <label class="label-admin d-block mb-2">Tiempo permitido</label>
-                <select class="form-select rounded-3 mb-4" id="session-timer">
-                  <option value="15">15 minutos</option>
-                  <option value="30" selected>30 minutos</option>
-                  <option value="60">1 hora</option>
-                </select>
+              <div id="timer-options" class="row g-3 mb-4">
+                <div class="col-6">
+                  <label class="label-admin d-block mb-2">Segundos Admin</label>
+                  <input type="number" id="session-admin-segundos" class="form-control rounded-3" placeholder="Ej: 300" min="10" />
+                </div>
+                <div class="col-6">
+                  <label class="label-admin d-block mb-2">Segundos Usuario</label>
+                  <input type="number" id="session-user-segundos" class="form-control rounded-3" placeholder="Ej: 1800" min="10" />
+                </div>
               </div>
               <button class="btn btn-dark rounded-pill fw-bold w-100 py-2" id="btn-guardar-seguridad">GUARDAR</button>
             </div>
@@ -580,6 +583,7 @@
     <script src="js/cargarProductos.js"></script>
     <script src="js/renderizarProductos.js"></script>
     <script src="js/renderizarTablaProductos.js"></script>
+    <script src="js/adminSeguridad.js"></script>
     <script src="js/filtrosProductos.js"></script>
     <script src="js/carritoStorage.js"></script>
     <script src="js/renderizarHisCompras.js"></script>
