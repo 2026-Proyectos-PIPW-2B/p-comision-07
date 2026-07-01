@@ -102,13 +102,7 @@ function guardarCambiosProducto(evento) {
     // Refrescamos la tabla
     renderizarTablaProductos();
     
-    // Mostramos un mensaje de éxito
-    const toastMensaje = document.getElementById("toast-msg");
-    if (toastMensaje) {
-      toastMensaje.innerHTML = "Producto actualizado correctamente.";
-      const toastEl = document.getElementById("adminToast");
-      new bootstrap.Toast(toastEl).show();
-    }
+
   }
 }
 

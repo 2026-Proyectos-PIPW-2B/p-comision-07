@@ -73,11 +73,6 @@ function guardarCambiosCategoria(evento) {
       cargarFiltrosCategoriasAdmin();
     }
 
-    const toastMensaje = document.getElementById("toast-msg");
-    if (toastMensaje) {
-      toastMensaje.innerHTML = "<i class='bi bi-check-circle me-2'></i>Categoría actualizada correctamente.";
-      const toastEl = document.getElementById("adminToast");
-      new bootstrap.Toast(toastEl).show();
-    }
+
   }
 }
