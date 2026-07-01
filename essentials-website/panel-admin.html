@@ -396,6 +396,52 @@
               <div class="container my-5" style="min-height: 60vh;">
                 <h2 class="mb-4">Historial de Compras</h2>
         
+                <section
+                  id="filtros-historial"
+                  aria-label="Filtrar historial de compras"
+                  class="bg-white shadow-sm rounded-4 py-3 px-4 border mb-4 text-start"
+                >
+                  <div class="row g-3 align-items-end">
+                    <div class="col-12 col-md-2">
+                      <label for="filtro-usuario" class="form-label small text-muted text-uppercase fw-semibold mb-1" style="letter-spacing: 1px;">Usuario</label>
+                      <select id="filtro-usuario" class="form-select form-select-sm">
+                        <option value="">Todos</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-2 position-relative">
+                      <label for="filtro-fecha-desde" class="form-label small text-muted text-uppercase fw-semibold mb-1" style="letter-spacing: 1px;">Fecha Desde</label>
+                      <input type="date" id="filtro-fecha-desde" class="form-control form-control-sm">
+                      <div class="invalid-tooltip" style="font-size: 0.7rem;">Fecha futura inválida.</div>
+                    </div>
+                    <div class="col-12 col-md-2 position-relative">
+                      <label for="filtro-fecha-hasta" class="form-label small text-muted text-uppercase fw-semibold mb-1" style="letter-spacing: 1px;">Fecha Hasta</label>
+                      <input type="date" id="filtro-fecha-hasta" class="form-control form-control-sm">
+                      <div class="invalid-tooltip" style="font-size: 0.7rem;">Fecha futura inválida.</div>
+                    </div>
+                    <div class="col-12 col-md-3 position-relative">
+                      <label for="filtro-monto-min" class="form-label small text-muted text-uppercase fw-semibold mb-1" style="letter-spacing: 1px;">Monto Mín.</label>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text">$</span>
+                        <input type="number" id="filtro-monto-min" class="form-control" placeholder="0" min="0">
+                        <div class="invalid-tooltip" style="font-size: 0.7rem;">No puede ser negativo.</div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 position-relative">
+                      <label for="filtro-monto-max" class="form-label small text-muted text-uppercase fw-semibold mb-1" style="letter-spacing: 1px;">Monto Máx.</label>
+                      <div class="input-group input-group-sm">
+                        <span class="input-group-text">$</span>
+                        <input type="number" id="filtro-monto-max" class="form-control" placeholder="0" min="0">
+                        <div class="invalid-tooltip" style="font-size: 0.7rem;">No puede ser negativo.</div>
+                      </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mt-3">
+                      <button type="button" id="btn-limpiar-filtros" class="btn btn-sm btn-outline-dark">
+                        <i class="bi bi-eraser me-1"></i> Limpiar Filtros
+                      </button>
+                    </div>
+                  </div>
+                </section>
+
                 <div class="table-responsive bg-white p-3 rounded shadow-sm">
                   <table class="table table-hover align-middle">
                     <thead class="table-dark text-center">
@@ -496,7 +542,6 @@
       </div>
     </div>
 
-    <!-- Modal Editar Producto -->
     <div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
@@ -541,7 +586,6 @@
       </div>
     </div>
 
-    <!-- Modal Editar Categoría -->
     <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
@@ -567,7 +611,6 @@
       </div>
     </div>
 
-    <!-- Modal Editar Usuario -->
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
@@ -612,6 +655,7 @@
     <script src="js/adminSeguridad.js"></script>
     <script src="js/filtrosProductos.js"></script>
     <script src="js/carritoStorage.js"></script>
+    <script src="js/filtrosHisCompras.js"></script>
     <script src="js/renderizarHisCompras.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/adminDashboard.js"></script>
