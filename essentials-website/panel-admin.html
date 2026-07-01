@@ -541,6 +541,32 @@
       </div>
     </div>
 
+    <!-- Modal Editar Categoría -->
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow-lg bg-light">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title bebas">Editar Categoría</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <form id="form-editar-categoria">
+              <input type="hidden" id="edit-cat-index">
+              <div class="mb-3">
+                <label class="label-admin d-block mb-1">Nombre</label>
+                <input type="text" id="edit-cat-nombre" class="form-control rounded-3" required />
+              </div>
+              <div class="mb-4">
+                <label class="label-admin d-block mb-1">Imagen (nombre + formato)</label>
+                <input type="text" id="edit-cat-imagen" class="form-control rounded-3" required />
+              </div>
+              <button type="submit" class="btn btn-dark rounded-pill px-4 w-100 fw-bold">GUARDAR CAMBIOS</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal Editar Usuario -->
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -598,6 +624,7 @@
     <script src="js/previsualizarProducto.js"></script>
     <script src="js/editarProducto.js"></script>
     <script src="js/adminCategorias.js"></script>
+    <script src="js/editarCategoria.js"></script>
     <script src="js/eliminarCategoria.js"></script>
   </body>
 </html>

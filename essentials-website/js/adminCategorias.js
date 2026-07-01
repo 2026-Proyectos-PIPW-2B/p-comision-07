@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="text-center align-middle fw-medium">${cat.nombre}</td>
         <td class="text-center align-middle"><code class="small text-muted">${cat.imagen}</code></td>
         <td class="text-center align-middle">
+          <button class="btn btn-sm btn-outline-primary btn-editar-cat" data-index="${index}" title="Editar">
+            <i class="bi bi-pencil"></i>
+          </button>
           <button class="btn btn-sm btn-outline-danger btn-eliminar-cat" data-index="${index}" title="Eliminar">
             <i class="bi bi-trash"></i>
           </button>
