@@ -1,10 +1,17 @@
 const usuariosIniciales = [
   {
     id: 1,
-    nombre: "Admin",
+    nombre: "Administrador",
     email: "admin@essentials.com",
-    password: "123456",
+    password: "administrador",
     rol: "admin",
+    bloqueado: false,
+
+    id: 2,
+    nombre: "Usuario",
+    email: "usuario@essentials.com",
+    password: "usuario",
+    rol: "usuario",
     bloqueado: false,
   },
 ];
