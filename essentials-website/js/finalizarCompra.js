@@ -123,7 +123,10 @@ const Checkout = {
       subtotal += item.precio * item.cantidad;
     }
 
-    const envio = subtotal > 0 ? Carrito.COSTO_ENVIO : 0;
+    let envio = 0;
+    if (subtotal > 0) {
+      envio = Carrito.COSTO_ENVIO;
+    }
 
     return { subtotal: subtotal, envio: envio, total: subtotal + envio };
   },
@@ -164,6 +167,24 @@ const Checkout = {
     };
 
     Checkout.guardarPedido(pedido);
+
+    const baseProductos = JSON.parse(localStorage.getItem("productos")) || [];
+    let stockModificado = false;
+    for (const item of items) {
+      const p = baseProductos.find(bp => bp.id === item.id);
+      if (p) {
+        if (p.cantidadStock >= item.cantidad) {
+          p.cantidadStock -= item.cantidad;
+        } else {
+          p.cantidadStock = 0;
+        }
+        stockModificado = true;
+      }
+    }
+    
+    if (stockModificado) {
+      localStorage.setItem("productos", JSON.stringify(baseProductos));
+    }
 
     CarritoStorage.guardar([]);
 
