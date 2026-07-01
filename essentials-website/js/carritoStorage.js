@@ -1,5 +1,4 @@
 const CarritoStorage = {
-
   CLAVE: "carrito",
 
   obtener: function () {
@@ -14,7 +13,7 @@ const CarritoStorage = {
     const carrito = CarritoStorage.obtener();
     const productosDB = JSON.parse(localStorage.getItem("productos")) || [];
     const prodDB = productosDB.find((p) => p.id === idProducto);
-    
+
     if (!prodDB || prodDB.cantidadStock === 0) {
       alert("No hay stock disponible de este producto.");
       return;
@@ -27,7 +26,9 @@ const CarritoStorage = {
     }
 
     if (cantidadSolicitada > prodDB.cantidadStock) {
-      alert(`Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`);
+      alert(
+        `Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`,
+      );
       return;
     }
 
@@ -44,18 +45,23 @@ const CarritoStorage = {
     const carrito = CarritoStorage.obtener();
     const productosDB = JSON.parse(localStorage.getItem("productos")) || [];
     const prodDB = productosDB.find((p) => p.id === idProducto);
-    
+    let cantidadFinal = cantidad;
+
     if (prodDB && cantidad > prodDB.cantidadStock) {
-      alert(`Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`);
-      cantidad = prodDB.cantidadStock;
+      alert(
+        `Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`,
+      );
+      cantidadFinal = prodDB.cantidadStock;
     }
 
     const item = carrito.find((item) => item.id === idProducto);
 
     if (item) {
-      item.cantidad = cantidad;
+      item.cantidad = cantidadFinal;
       CarritoStorage.guardar(carrito);
     }
+    
+    return cantidadFinal;
   },
 
   eliminarProducto: function (idProducto) {
@@ -81,5 +87,4 @@ const CarritoStorage = {
 
     contador.textContent = CarritoStorage.contarUnidades();
   },
-
 };

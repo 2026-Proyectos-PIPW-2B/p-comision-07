@@ -5,8 +5,8 @@ const Carrito = {
   sumar: function (idProducto, card, cantidadSpan) {
     const nuevaCantidad = Number(cantidadSpan.textContent) + 1;
 
-    cantidadSpan.textContent = nuevaCantidad;
-    CarritoStorage.actualizarCantidad(idProducto, nuevaCantidad);
+    const cantidadFinal = CarritoStorage.actualizarCantidad(idProducto, nuevaCantidad);
+    cantidadSpan.textContent = cantidadFinal;
     Carrito.actualizarResumen();
   },
 
@@ -15,8 +15,8 @@ const Carrito = {
 
     if (cantidadActual > 1) {
       const nuevaCantidad = cantidadActual - 1;
-      cantidadSpan.textContent = nuevaCantidad;
-      CarritoStorage.actualizarCantidad(idProducto, nuevaCantidad);
+      const cantidadFinal = CarritoStorage.actualizarCantidad(idProducto, nuevaCantidad);
+      cantidadSpan.textContent = cantidadFinal;
       Carrito.actualizarResumen();
     }
   },
