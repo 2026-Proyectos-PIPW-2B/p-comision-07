@@ -4,7 +4,7 @@ const categoriasIniciales = [
   { nombre: "Buzos", imagen: "cat-buzos.webp" },
   { nombre: "Remeras", imagen: "cat-remeras.webp" },
   { nombre: "Combos", imagen: "cat-combos.webp" },
-  { nombre: "Accesorios", imagen: "cat-accesorios.jpg" }
+  { nombre: "Accesorios", imagen: "cat-accesorios.webp" },
 ];
 
 function inicializarCategorias() {

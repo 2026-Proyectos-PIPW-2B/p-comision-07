@@ -6,7 +6,8 @@ const usuariosIniciales = [
     password: "administrador",
     rol: "admin",
     bloqueado: false,
-
+  },
+  {
     id: 2,
     nombre: "Usuario",
     email: "usuario@essentials.com",
