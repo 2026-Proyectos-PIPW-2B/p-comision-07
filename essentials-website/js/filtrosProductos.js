@@ -44,25 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectorOrden = document.getElementById("ordenar-selector");
   const btnAsc = document.getElementById("orden-asc");
   const btnDesc = document.getElementById("orden-desc");
-  const botonesCategoria = document.querySelectorAll(".btn-categoria");
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get('cat');
+  if (catParam) {
+    categoriaActual = catParam;
+    aplicarFiltrosYOrden();
+  }
+
+  iniciarFiltrosAdmin();
 
   buscador.addEventListener("input", (e) => {
     terminoBusqueda = e.target.value;
     aplicarFiltrosYOrden();
-  });
-
-  botonesCategoria.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      botonesCategoria.forEach((b) => {
-        b.classList.remove("btn-dark", "fw-semibold");
-        b.classList.add("btn-outline-dark");
-      });
-      btn.classList.remove("btn-outline-dark");
-      btn.classList.add("btn-dark", "fw-semibold");
-
-      categoriaActual = btn.getAttribute("data-categoria");
-      aplicarFiltrosYOrden();
-    });
   });
 
   selectorOrden.addEventListener("change", (e) => {
@@ -83,4 +76,36 @@ document.addEventListener("DOMContentLoaded", () => {
     btnAsc.classList.replace("btn-dark", "btn-outline-dark");
     aplicarFiltrosYOrden();
   });
+});
+
+function iniciarFiltrosAdmin() {
+  const botonesCategoria = document.querySelectorAll(".btn-categoria");
+  if (!botonesCategoria.length) return;
+
+  botonesCategoria.forEach((btn) => {
+    if (btn.getAttribute("data-categoria") === categoriaActual) {
+      botonesCategoria.forEach((b) => {
+        b.classList.remove("btn-dark", "fw-semibold");
+        b.classList.add("btn-outline-dark");
+      });
+      btn.classList.remove("btn-outline-dark");
+      btn.classList.add("btn-dark", "fw-semibold");
+    }
+
+    btn.addEventListener("click", () => {
+      botonesCategoria.forEach((b) => {
+        b.classList.remove("btn-dark", "fw-semibold");
+        b.classList.add("btn-outline-dark");
+      });
+      btn.classList.remove("btn-outline-dark");
+      btn.classList.add("btn-dark", "fw-semibold");
+
+      categoriaActual = btn.getAttribute("data-categoria");
+      aplicarFiltrosYOrden();
+    });
+  });
+}
+
+document.addEventListener("categoriasFiltrosAdminRenderizadas", () => {
+  iniciarFiltrosAdmin();
 });
