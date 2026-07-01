@@ -45,14 +45,11 @@ function abrirModalEditarProducto(idProducto) {
     let nombreImagen = productoEncontrado.imagen.replace("img/", "").replace(".webp", "");
     document.getElementById("edit-prod-imagen").value = nombreImagen;
 
-    // Para el stock, elegimos la opción correcta
-    const selectStock = document.getElementById("edit-prod-stock");
-    if (productoEncontrado.estadoStock.includes("alto")) {
-      selectStock.value = "alto";
-    } else if (productoEncontrado.estadoStock.includes("medio")) {
-      selectStock.value = "medio";
+    const inputStock = document.getElementById("edit-prod-stock");
+    if (productoEncontrado.cantidadStock !== undefined) {
+      inputStock.value = productoEncontrado.cantidadStock;
     } else {
-      selectStock.value = "ultimas";
+      inputStock.value = 0;
     }
 
     // Mostramos el modal de Bootstrap
@@ -78,28 +75,15 @@ function guardarCambiosProducto(evento) {
     let nuevoPrecio = parseFloat(document.getElementById("edit-prod-precio").value);
     let nombreImagen = document.getElementById("edit-prod-imagen").value;
     
-    // Definimos los textos y colores para el stock según lo seleccionado
-    let stockElegido = document.getElementById("edit-prod-stock").value;
-    let textoStock = "";
-    let claseStock = "";
-    
-    if (stockElegido === "alto") {
-      textoStock = "Stock alto";
-      claseStock = "text-success";
-    } else if (stockElegido === "medio") {
-      textoStock = "Stock medio";
-      claseStock = "text-warning";
-    } else {
-      textoStock = "Últimas unidades";
-      claseStock = "text-danger";
-    }
+    let stockElegido = parseInt(document.getElementById("edit-prod-stock").value) || 0;
 
     // Actualizamos el producto con los nuevos datos
     productos[index].nombre = nuevoNombre;
     productos[index].categoria = nuevaCategoria;
     productos[index].precio = nuevoPrecio;
-    productos[index].estadoStock = textoStock;
-    productos[index].claseStock = claseStock;
+    productos[index].cantidadStock = stockElegido;
+    delete productos[index].estadoStock;
+    delete productos[index].claseStock;
     productos[index].imagen = "img/" + nombreImagen + ".webp";
     
     // Guardamos en localStorage

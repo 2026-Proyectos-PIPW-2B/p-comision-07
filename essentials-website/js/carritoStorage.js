@@ -12,7 +12,24 @@ const CarritoStorage = {
 
   agregarProducto: function (idProducto) {
     const carrito = CarritoStorage.obtener();
+    const productosDB = JSON.parse(localStorage.getItem("productos")) || [];
+    const prodDB = productosDB.find((p) => p.id === idProducto);
+    
+    if (!prodDB || prodDB.cantidadStock === 0) {
+      alert("No hay stock disponible de este producto.");
+      return;
+    }
+
     const itemExistente = carrito.find((item) => item.id === idProducto);
+    let cantidadSolicitada = 1;
+    if (itemExistente) {
+      cantidadSolicitada = itemExistente.cantidad + 1;
+    }
+
+    if (cantidadSolicitada > prodDB.cantidadStock) {
+      alert(`Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`);
+      return;
+    }
 
     if (itemExistente) {
       itemExistente.cantidad += 1;
@@ -25,6 +42,14 @@ const CarritoStorage = {
 
   actualizarCantidad: function (idProducto, cantidad) {
     const carrito = CarritoStorage.obtener();
+    const productosDB = JSON.parse(localStorage.getItem("productos")) || [];
+    const prodDB = productosDB.find((p) => p.id === idProducto);
+    
+    if (prodDB && cantidad > prodDB.cantidadStock) {
+      alert(`Solo tenemos ${prodDB.cantidadStock} unidades disponibles en stock.`);
+      cantidad = prodDB.cantidadStock;
+    }
+
     const item = carrito.find((item) => item.id === idProducto);
 
     if (item) {

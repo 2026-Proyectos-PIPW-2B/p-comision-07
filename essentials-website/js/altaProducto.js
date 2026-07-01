@@ -7,36 +7,75 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const nombre = document.getElementById("prod-nombre").value.trim();
       const categoria = document.getElementById("prod-categoria").value;
-      const stockVal = document.getElementById("prod-stock").value;
-      const precioVal = parseFloat(document.getElementById("prod-precio").value);
-      const descVal = parseInt(document.getElementById("prod-descuento").value) || 0;
+      
+      const stockInput = document.getElementById("prod-stock").value.trim();
+      const precioInput = document.getElementById("prod-precio").value.trim();
+      
+      const descuentoInput = document.getElementById("prod-descuento").value.trim();
+      let descVal = 0;
+
       const imgNombre = document.getElementById("prod-img-nombre").value.trim();
       const imgFormato = document.getElementById("prod-img-formato").value;
 
-      // Validación simple
-      if (!nombre || !categoria || !stockVal || isNaN(precioVal) || precioVal <= 0 || !imgNombre || !imgFormato) {
-        alert("Por favor completá todos los campos requeridos correctamente.");
-        return;
+      // Validación estricta con array de errores
+      const errores = [];
+
+      if (!nombre) errores.push("El nombre del producto no puede estar vacío.");
+      if (!categoria) errores.push("Tenés que seleccionar una categoría.");
+      
+      if (!stockInput) {
+        errores.push("El stock no puede estar vacío.");
+      } else {
+        const stockVal = parseInt(stockInput);
+        if (isNaN(stockVal) || stockVal < 0) {
+          errores.push("El stock no puede ser negativo.");
+        }
       }
 
-      if (descVal < 0 || descVal > 100) {
-        alert("El descuento debe ser un porcentaje válido entre 0 y 100.");
-        return;
+      if (!precioInput) {
+        errores.push("El precio no puede estar vacío.");
+      } else {
+        const precioVal = parseFloat(precioInput);
+        if (isNaN(precioVal) || precioVal <= 0) {
+          errores.push("El precio debe ser un número mayor a 0.");
+        }
       }
 
-      // Mapear stock a estados e íconos de stock
-      let estadoStock = "Stock alto";
-      let claseStock = "text-success";
-      if (stockVal === "medio") {
-        estadoStock = "Stock medio";
-        claseStock = "text-warning";
-      } else if (stockVal === "ultimas") {
-        estadoStock = "Últimas unidades";
-        claseStock = "text-danger";
+      if (descuentoInput !== "") {
+        descVal = parseInt(descuentoInput);
+        if (isNaN(descVal) || descVal < 1 || descVal > 100) {
+          errores.push("El porcentaje de descuento debe estar entre 1 y 100.");
+        }
       }
+
+      if (!imgNombre) errores.push("Tenés que ingresar el nombre de la imagen.");
+      if (!imgFormato) errores.push("Tenés que seleccionar el formato de la imagen.");
+
+      const contenedorErrores = document.getElementById("errores-producto");
+      const listaErrores = document.getElementById("lista-errores-producto");
+
+      if (errores.length > 0) {
+        listaErrores.innerHTML = "";
+        errores.forEach(err => {
+          const li = document.createElement("li");
+          li.textContent = err;
+          listaErrores.appendChild(li);
+        });
+        contenedorErrores.classList.remove("d-none");
+        return;
+      } else {
+        if (contenedorErrores) {
+          contenedorErrores.classList.add("d-none");
+        }
+      }
+
+
 
       // Formatear descuento
-      const descuento = descVal > 0 ? `-${descVal}% OFF` : "";
+      let descuento = "";
+      if (descVal > 0) {
+        descuento = `-${descVal}% OFF`;
+      }
 
       // Crear ruta de imagen
       const imagen = `img/${imgNombre}${imgFormato}`;
@@ -47,11 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
         id: Date.now(), // Utiliza Date.now() para generar un id automático único
         categoria: categoria,
         nombre: nombre,
-        estadoStock: estadoStock,
-        precio: precioVal,
+        cantidadStock: parseInt(stockInput),
+        precio: parseFloat(precioInput),
         imagen: imagen,
-        descuento: descuento,
-        claseStock: claseStock
+        descuento: descuento
       };
 
       productos.push(nuevoProducto);

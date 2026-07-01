@@ -303,23 +303,18 @@
               <form id="form-producto">
                 <div class="mb-4">
                   <label class="label-admin d-block mb-2">Nombre del Producto *</label>
-                  <input type="text" id="prod-nombre" class="form-control rounded-3" placeholder="Ej: Buzo Hoodie" required />
+                  <input type="text" id="prod-nombre" class="form-control rounded-3" placeholder="Ej: Buzo Hoodie" />
                 </div>
                 <div class="row g-3 mb-4">
                   <div class="col-6">
                     <label class="label-admin d-block mb-2">Categoría *</label>
-                    <select class="form-select rounded-3" id="prod-categoria" required>
+                    <select class="form-select rounded-3" id="prod-categoria">
                       <option value="">Seleccioná</option>
                     </select>
                   </div>
-                  <div class="col-6">
-                    <label class="label-admin d-block mb-2">Stock *</label>
-                    <select class="form-select rounded-3" id="prod-stock" required>
-                      <option value="">Seleccioná</option>
-                      <option value="alto">🟢 Stock alto</option>
-                      <option value="medio">🟡 Stock medio</option>
-                      <option value="ultimas">🔴 Últimas unidades</option>
-                    </select>
+                  <div class="col-md-6">
+                    <label for="prod-stock" class="label-admin">Stock disponible *</label>
+                    <input type="number" class="form-control" id="prod-stock" min="0" value="0" />
                   </div>
                 </div>
                 <div class="row g-3 mb-4">
@@ -327,7 +322,7 @@
                     <label class="label-admin d-block mb-2">Precio *</label>
                     <div class="input-group">
                       <span class="input-group-text">$</span>
-                      <input type="number" id="prod-precio" class="form-control" placeholder="0" min="0" required />
+                      <input type="number" id="prod-precio" class="form-control" placeholder="0" min="0" />
                     </div>
                   </div>
                   <div class="col-6">
@@ -342,10 +337,10 @@
                   <label class="label-admin d-block mb-2">Imagen del Producto *</label>
                   <div class="row g-2">
                     <div class="col-8">
-                      <input type="text" id="prod-img-nombre" class="form-control rounded-3" placeholder="Nombre (ej: producto-1)" required />
+                      <input type="text" id="prod-img-nombre" class="form-control rounded-3" placeholder="Nombre (ej: producto-1)" />
                     </div>
                     <div class="col-4">
-                      <select id="prod-img-formato" class="form-select rounded-3" required>
+                      <select id="prod-img-formato" class="form-select rounded-3">
                         <option value=".webp">.webp</option>
                         <option value=".jpg">.jpg</option>
                         <option value=".jpeg">.jpeg</option>
@@ -354,6 +349,11 @@
                     </div>
                   </div>
                 </div>
+                
+                <div id="errores-producto" class="alert alert-danger d-none rounded-3 small mb-0 mt-2">
+                  <ul class="mb-0" id="lista-errores-producto"></ul>
+                </div>
+
                 <hr class="my-4" />
                 <div class="d-grid gap-2">
                   <button type="submit" class="btn btn-dark rounded-pill fw-bold py-2"><i class="bi bi-cloud-arrow-up me-2"></i>SUBIR PRODUCTO</button>
@@ -607,11 +607,7 @@
                 </div>
                 <div class="col-6">
                   <label class="label-admin d-block mb-1">Stock</label>
-                  <select class="form-select rounded-3" id="edit-prod-stock" required>
-                    <option value="alto">🟢 Stock alto</option>
-                    <option value="medio">🟡 Stock medio</option>
-                    <option value="ultimas">🔴 Últimas unidades</option>
-                  </select>
+                  <input type="number" class="form-control rounded-3" id="edit-prod-stock" min="0" required />
                 </div>
               </div>
               <div class="mb-3">
@@ -670,6 +666,7 @@
     <script src="js/validacion.js"></script>
     <script src="js/cargarCategorias.js"></script>
     <script src="js/renderizarCategorias.js"></script>
+    <script src="js/utilidadesStock.js"></script>
     <script src="js/cargarProductos.js"></script>
     <script src="js/renderizarProductos.js"></script>
     <script src="js/renderizarTablaProductos.js"></script>

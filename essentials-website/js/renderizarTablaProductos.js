@@ -7,6 +7,13 @@ function renderizarTablaProductos(listaProductos) {
   tbody.innerHTML = "";
 
   productosAMostrar.forEach((producto) => {
+    let stockInfo;
+    if (window.obtenerInfoStock) {
+      stockInfo = window.obtenerInfoStock(producto.cantidadStock);
+    } else {
+      stockInfo = { texto: "Stock desconocido", clase: "text-muted", cantidad: 0 };
+    }
+
     const row = document.createElement("tr");
     row.innerHTML = `
       <td class="fw-bold text-center">${producto.id}</td>
@@ -14,7 +21,7 @@ function renderizarTablaProductos(listaProductos) {
       <td class="text-center">${producto.categoria}</td>
       <td class="text-center">$${producto.precio.toLocaleString()}</td>
       <td class="text-center">
-        <span class="badge ${producto.claseStock.replace('text-', 'bg-')}">${producto.estadoStock}</span>
+        <span class="badge ${stockInfo.clase.replace('text-', 'bg-')}">${stockInfo.cantidad}</span>
       </td>
       <td class="text-center"><code class="small text-muted">${producto.imagen.split('/').pop()}</code></td>
       <td class="text-center">
