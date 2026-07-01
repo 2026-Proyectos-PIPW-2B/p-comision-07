@@ -53,14 +53,42 @@ window.renderizarTablaUsuarios = function() {
 
     // Rol badge
     const esAdmin = user.rol === "admin";
-    const rolBadge = esAdmin 
-      ? `<span class="badge bg-dark text-white border">Administrador</span>`
-      : `<span class="badge bg-light text-dark border">Usuario</span>`;
+    let rolBadge;
+    if (esAdmin) {
+      rolBadge = `<span class="badge bg-dark text-white border">Administrador</span>`;
+    } else {
+      rolBadge = `<span class="badge bg-light text-dark border">Usuario</span>`;
+    }
 
     // Prevenir auto-bloqueo y auto-eliminación
     const esMismoUsuario = user.id === usuarioLogueado.id;
-    const switchDisabledAttr = esMismoUsuario ? "disabled" : "";
-    const deleteDisabledAttr = esMismoUsuario ? "disabled" : "";
+    let switchDisabledAttr;
+    if (esMismoUsuario) {
+      switchDisabledAttr = "disabled";
+    } else {
+      switchDisabledAttr = "";
+    }
+
+    let deleteDisabledAttr;
+    if (esMismoUsuario) {
+      deleteDisabledAttr = "disabled";
+    } else {
+      deleteDisabledAttr = "";
+    }
+
+    let checkedAttr;
+    if (user.bloqueado) {
+      checkedAttr = 'checked';
+    } else {
+      checkedAttr = '';
+    }
+
+    let titleEliminar;
+    if (esMismoUsuario) {
+      titleEliminar = 'No podés eliminarte a vos mismo';
+    } else {
+      titleEliminar = 'Eliminar';
+    }
 
     tr.innerHTML = `
       <td class="fw-bold text-center">${user.id}</td>
@@ -69,14 +97,14 @@ window.renderizarTablaUsuarios = function() {
       <td class="text-center">${rolBadge}</td>
       <td class="text-center">
         <div class="form-check form-switch d-flex justify-content-center">
-          <input class="form-check-input switch-bloqueo" type="checkbox" role="switch" data-id="${user.id}" ${user.bloqueado ? 'checked' : ''} ${switchDisabledAttr}>
+          <input class="form-check-input switch-bloqueo" type="checkbox" role="switch" data-id="${user.id}" ${checkedAttr} ${switchDisabledAttr}>
         </div>
       </td>
       <td class="text-center">
         <button class="btn btn-sm btn-outline-primary btn-editar-usuario" data-id="${user.id}" title="Editar">
           <i class="bi bi-pencil"></i>
         </button>
-        <button class="btn btn-sm btn-outline-danger btn-eliminar-usuario" data-id="${user.id}" ${deleteDisabledAttr} title="${esMismoUsuario ? 'No podés eliminarte a vos mismo' : 'Eliminar'}">
+        <button class="btn btn-sm btn-outline-danger btn-eliminar-usuario" data-id="${user.id}" ${deleteDisabledAttr} title="${titleEliminar}">
           <i class="bi bi-trash"></i>
         </button>
       </td>

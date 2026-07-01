@@ -26,9 +26,17 @@ function aplicarFiltrosYOrden() {
     }
 
     if (direccionOrden === "asc") {
-      return valorA > valorB ? 1 : -1;
+      if (valorA > valorB) {
+        return 1;
+      } else {
+        return -1;
+      }
     } else {
-      return valorA < valorB ? 1 : -1;
+      if (valorA < valorB) {
+        return 1;
+      } else {
+        return -1;
+      }
     }
   });
 

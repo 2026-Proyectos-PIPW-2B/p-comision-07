@@ -37,7 +37,12 @@ const Carrito = {
       subtotal += precio * cantidad;
     });
 
-    const envio = subtotal > 0 ? Carrito.COSTO_ENVIO : 0;
+    let envio;
+    if (subtotal > 0) {
+      envio = Carrito.COSTO_ENVIO;
+    } else {
+      envio = 0;
+    }
     const total = subtotal + envio;
 
     document.getElementById("resumen-subtotal").textContent = "$" + subtotal.toLocaleString("es-AR");

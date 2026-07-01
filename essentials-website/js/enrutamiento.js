@@ -8,7 +8,11 @@
         if (!cuentaValida || cuentaValida.bloqueado) {
             localStorage.removeItem("usuarioLogueado");
             usuarioLogueado = null;
-            alert(cuentaValida ? "Tu cuenta ha sido bloqueada." : "Tu cuenta ha sido eliminada por un administrador.");
+            if (cuentaValida) {
+                alert("Tu cuenta ha sido bloqueada.");
+            } else {
+                alert("Tu cuenta ha sido eliminada por un administrador.");
+            }
             window.location.href = "login.html";
             return;
         }
@@ -16,7 +20,12 @@
 
     const path = window.location.pathname;
     const paginaActual = path.substring(path.lastIndexOf('/') + 1) || 'inicio.html';
-    const rol = usuarioLogueado ? usuarioLogueado.rol : 'invitado';
+    let rol;
+    if (usuarioLogueado) {
+        rol = usuarioLogueado.rol;
+    } else {
+        rol = 'invitado';
+    }
 
     if (rol === 'admin' && paginaActual !== 'panel-admin.html') {
         window.location.href = 'panel-admin.html';
@@ -37,7 +46,11 @@
     }
 
     if (rol !== 'invitado' && paginaActual === 'login.html') {
-        window.location.href = rol === 'admin' ? 'panel-admin.html' : 'inicio.html';
+        if (rol === 'admin') {
+            window.location.href = 'panel-admin.html';
+        } else {
+            window.location.href = 'inicio.html';
+        }
         return;
     }
 })();
